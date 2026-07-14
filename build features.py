@@ -35,7 +35,6 @@ def add_rest_days(df):
     df = df.sort_values(["team", "date"]).copy()
     df["prev_game_date"] = df.groupby("team")["date"].shift(1)
     df["rest_days"] = (df["date"] - df["prev_game_date"]).dt.days
-    # first game of a team's history has no previous game — fill with a neutral value
     df["rest_days"] = df["rest_days"].fillna(7).clip(upper=10)
     df["back_to_back"] = (df["rest_days"] <= 1).astype(int)
     df = df.drop(columns=["prev_game_date"])
@@ -83,7 +82,7 @@ def build_matchup_table(df):
 
 
 def main():
-    df = load_games("nba_games.csv")
+    df = load_games("data/nba_games/nba_games.csv")
     df = add_rolling_features(df, window=10)
     df = add_rest_days(df)
     df = add_recent_form(df, window=10)
@@ -97,7 +96,7 @@ def main():
     matchups = matchups.dropna(subset=[c for c in feature_cols if not c.startswith("opp_")])
     print(f"Dropped {before - len(matchups)} early-season rows with insufficient history")
 
-    matchups.to_csv("features.csv", index=False)
+    matchups.to_csv("data/processed/features.csv", index=False)
     print(f"Saved features.csv: {matchups.shape[0]} rows, {matchups.shape[1]} columns")
     print("\nSample columns:", [c for c in matchups.columns if "roll10" in c][:6])
     print("\nTarget balance (won):")
