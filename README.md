@@ -74,7 +74,7 @@ Trains a simple logistic regression on a time-based train/test split and compare
 | Shakti | Scraping (game box scores) | ✅ Done |
 | Asmit | Scraping (MVP/player/team stats) | ✅ Done |
 | Suraj | Feature engineering | ✅ Done, validated |
-| Asmit | Machine learning model | 🔲 In progress |
+| Samyog | Machine learning model | 🔲 In progress |
 | — | API integration (live/upcoming games) | 🔲 Not started |
 | — | Dashboard | 🔲 Not started |
 
