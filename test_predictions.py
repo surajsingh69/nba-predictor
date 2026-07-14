@@ -1,7 +1,3 @@
-"""
-Deeper check on whether the model is really predicting anything.
-Run this after build_features.py. Complements quick_signal_test.py.
-"""
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score

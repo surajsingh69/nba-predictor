@@ -1,4 +1,3 @@
-# nba-predictor
 # NBA Game Predictor
 
 A  Python project that scrapes NBA data, engineers predictive features, and trains a machine learning model to predict game outcomes.
@@ -26,6 +25,7 @@ Project-Py/
 │       └── features.csv    # ML-ready feature table (output of build_features.py)
 ├── build_features.py       # turns nba_games.csv into features.csv
 ├── quick_signal_test.py    # sanity check: do the features actually predict anything?
+├── test_predictions.py     # deeper validation: confusion matrix, ROC-AUC, calibration, spot-checks
 ├── webscraping.ipynb        # scrapes MVP / player / team season stats
 └── README.md
 ```
@@ -49,6 +49,12 @@ Reads `data/nba_games/nba_games.csv`, outputs `data/processed/features.csv`.
 python quick_signal_test.py
 ```
 Trains a simple logistic regression on a time-based train/test split and compares it against a "home team always wins" baseline. Current result: **66.8% accuracy vs. 52.8% baseline.**
+
+**3. Deeper validation** (optional, but recommended before handoff):
+```bash
+python test_predictions.py
+```
+Goes beyond pass/fail — shows a confusion matrix, ROC-AUC (ranking quality), a calibration check (does "70% confident" really mean ~70% win rate?), and 5 example games with predicted vs. actual outcomes. Current result: **AUC 0.698**, well-calibrated across confidence buckets.
 
 ## What's in `features.csv`
 
